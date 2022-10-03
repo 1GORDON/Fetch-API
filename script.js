@@ -51,7 +51,11 @@ const getPosts = () => {
     // Fetch method takes two parameters the request url and returns a promise
     fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => {
-        return response.json();
+        if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error('Something went wrong on API server!');
+          }
     })
     .then((data) => {
         // Append Posts from the API to the DOM or webpage
